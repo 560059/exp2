@@ -1,0 +1,32 @@
+%Rolling N dice
+
+central_limit_theorem(2, 10000);
+function central_limit_theorem(N, num_trials)
+rolls = zeros(num_trials, N);
+for i = 1:num_trials
+% Roll N fair dice
+rolls(i, :) = randi([1, 6], 1, N);
+end
+
+sums = sum(rolls, 2);
+figure;
+histogram(sums, 'Normalization', 'probability', 'BinWidth', 1, 'EdgeColor', 'w');
+
+title(sprintf('Central Limit Theorem for Rolling %d Fair Dice %d times', N, num_trials));
+xlabel('Sum of Dice Rolls');
+ylabel('Probability');
+end
+
+%Tossing N Coins
+
+central_limit_theorem_coins(100, 10000);
+function central_limit_theorem_coins(N, num_tosses)
+tosses = randi([0, 1], num_tosses, N);
+sums = sum(tosses, 2);
+figure;
+histogram(sums, 'Normalization', 'probability', 'BinWidth', 1, 'EdgeColor', 'w');
+
+title(sprintf('Central Limit Theorem for Tossing %d Fair Coins %d times', N, num_tosses));
+xlabel('Heads');
+ylabel('Probability');
+end
